@@ -27,7 +27,7 @@ pub fn main() !void {
     defer env_map.deinit();
 
     // Read the port from the environment variables if provided, otherwise use 3000
-    const port_str = env_map.get("PORT") orelse null;
+    const port_str: ?[]const u8 = env_map.get("PORT") orelse null;
     const port: u16 = if (port_str) |str| try std.fmt.parseInt(u16, str, 10) else 3000;
 
     // Initialize the zap HTTP listener
@@ -35,6 +35,7 @@ pub fn main() !void {
         .port = port,
         .on_request = on_request,
         .log = true,
+        .public_folder = "public",
     });
     try listener.listen();
 
@@ -48,5 +49,3 @@ pub fn main() !void {
         .workers = 1,
     });
 }
-
-test "simple test" {}

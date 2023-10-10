@@ -5,7 +5,7 @@ FROM alpine:latest
 RUN apk add \
   --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
   --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \ 
-  --no-cache libpq zig
+  --no-cache zig
 
 # Copy files directory to /app
 COPY . /app
