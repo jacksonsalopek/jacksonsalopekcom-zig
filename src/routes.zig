@@ -22,9 +22,15 @@ pub fn matchRoute(r: zap.SimpleRequest) ?*const fn (zap.SimpleRequest) void {
     }
 
     if (std.mem.eql(u8, r.method.?, "GET") and
-        (std.mem.startsWith(u8, r.path.?, "/posts/")))
+        (std.mem.eql(u8, r.path.?, "/blog")))
     {
-        return handlers.posts.handle;
+        return handlers.blog.handle;
+    }
+
+    if (std.mem.eql(u8, r.method.?, "GET") and
+        (std.mem.startsWith(u8, r.path.?, "/blog/")))
+    {
+        return handlers.blog_post.handle;
     }
 
     return null;

@@ -1,15 +1,17 @@
 const std = @import("std");
 const layout_base = @embedFile("./layouts/base.html");
-const layout_post = @embedFile("./layouts/base.html");
+const layout_blog = @embedFile("./layouts/blog.html");
+const layout_blog_post = @embedFile("./layouts/blog-post.html");
 
-pub const Layout = enum { Base, Post };
+pub const Layout = enum { Base, Blog, BlogPost };
 
 pub fn renderInLayout(allocator: *std.mem.Allocator, layout: Layout, content: []const u8) ![]u8 {
     // Open the layout file.
     var contents = std.ArrayList(u8).init(allocator.*);
     const layout_contents = switch (layout) {
         .Base => layout_base,
-        .Post => layout_post,
+        .Blog => layout_blog,
+        .BlogPost => layout_blog_post,
     };
 
     var iter = std.mem.split(u8, layout_contents, "\n");
