@@ -21,4 +21,4 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Run the project with env variables
-CMD ["./zig-out/bin/zapi"]
+CMD ["./zig-out/bin/jacksonsalopekcom"]
